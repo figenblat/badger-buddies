@@ -3,7 +3,6 @@ import { Card, CarouselItem } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import CImage from 'react-bootstrap/Carousel';
 
 
 const BadgerBudSummary = ({ cat }) => {
