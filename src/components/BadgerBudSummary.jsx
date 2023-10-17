@@ -1,7 +1,10 @@
 
-import { Card } from 'react-bootstrap';
+import { Card, CarouselItem } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
+import CImage from 'react-bootstrap/Carousel';
+
 
 const BadgerBudSummary = ({ cat }) => {
   const imageSrc = `https://raw.githubusercontent.com/CS571-F23/hw5-api-static-content/main/cats/${cat.imgIds[0]}`;
@@ -44,24 +47,51 @@ const handleSave = () => {
   }
 };
 
+//let numImages = cat.imgIds.length;
+
+function makeCarousel(){
+  let carouselOfPics =[];
+    for(let i = 0; i < cat.imgIds.length; i++){
+      carouselOfPics.push(
+    <CarouselItem>
+      <img src= {`https://raw.githubusercontent.com/CS571-F23/hw5-api-static-content/main/cats/${cat.imgIds[i]}`} alt={`A picture of ${cat.name}`} className="d-block mx-auto img-fluid" style={{height:"300px", width:"300px"}}/>
+    </CarouselItem>
+      )
+  }
+  return carouselOfPics;
+}
+
+function singleImg(){
+  let singleImage = [];
+  if(showDetails === false){
+    singleImage =<img src= {imageSrc} alt={`A picture of ${cat.name}`} className="d-block mx-auto img-fluid" style={{height:"300px", width:"300px"}}/>
+  }
+  return singleImage
+
+}
+
 
   
 
   return (
     <Card className="m-auto" style={{margin:"10px", padding:"10px"}}> 
-      <img src={imageSrc} alt={`A picture of ${cat.name}`} className="d-block mx-auto img-fluid" style={{height:"300px", width:"300px"}}/>
+    {singleImg()}
       <h2>{cat.name}</h2>
       {showDetails ? (
         <div>
+          <Carousel>
+            {makeCarousel()}
+         </Carousel>
           <p>Gender: {cat.gender}</p>
           <p>Breed: {cat.breed}</p>
           <p>Age: {printAge(cat.age)}</p>
           {cat.description && <p> {cat.description}</p>}
           <Button onClick={toggleDetails}>Show Less</Button>
         </div>
-      ) : (
+      ) :(
         <Button onClick={toggleDetails}>Show More</Button>
-      )}
+      )
+      }
       
       <Button onClick ={handleSave} style={{margin:"5px"}} >Save</Button> 
     </Card>
