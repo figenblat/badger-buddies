@@ -44,11 +44,18 @@ export default function BadgerBudsAdoptable(props) {
           }
       }, [badgerBudsData, savedAndAdopted, savedCatIds]);
 
+      let noBuds = "";
+      if(availableCats.length ===0){
+        noBuds = "No buds are available for adoption!";
+      }
+
 
 
     return <div>
         <h1>Available Badger Buds</h1>
         <p>The following cats are looking for a loving home! Could you help?</p>
+        <p>{noBuds}</p>
+        
         <Container fluid>
         <Row>
         {availableCats.map((cat) => (

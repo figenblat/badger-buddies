@@ -23,11 +23,17 @@ export default function BadgerBudsBasket(props) {
       useEffect(()=>{
         setAvailableCats(badgerBudsData.filter((cat) => savedCatIds.includes(cat.id)));
       }, [badgerBudsData, savedCatIds]);
+
+      let noBuds = "";
+      if(availableCats.length === 0){
+        noBuds = "You have no buds in your basket!";
+      }
      
 
     return <div>
         <h1>Badger Buds Basket</h1>
         <p>These cute cats could be all yours!</p>
+        <p>{noBuds}</p>
 
         <Container fluid>
         <Row>
